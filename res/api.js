@@ -1,7 +1,12 @@
-var app = require('../server.js');
+const app = require('../server.js');
 
-app.post("/api/visitors", function (request, response) {
-    var userName = request.body.name;
-    response.send("Hello " + userName + "!");
-    return;
-}
+module.exports = function(app) {
+
+	app.post("/api/transcript", function (request, response) {
+	    response.send("Hello");
+	    return;
+	});
+	
+};
+
+

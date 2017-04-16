@@ -1,40 +1,31 @@
-var request = require('supertest'); 
-var should = require('should');
-var config = require('../config.js');
-var url = config.url;
+'use strict';
 
+const supertest = require('supertest'); 
+const should = require('should');
+const server = supertest.agent("http://localhost:3000");
 
-//TEMPLATE
-/*describe('/visitor', function() {
-	var body = {
-			name: 'Elia'
-	};
+describe('/api/transcript', function() {
+	const body = {};
 
-	it('should have status 200', function() {
-		request(url)
-			.post('/api/visitors')
-			.send(body)
-	    // end handles the response
-		.end(function(err, res) {
-	         if (err) {
-	         	throw err;
-	         }
-	         // this is should.js syntax, very clear
-	         res.status.should.equal(200);
-	    });
-	});
+	it("should have status 200",function(done){
+	    server
+	    .post("/api/transcript")
+	    .send(body)
+	    .expect(200)
+	    .end(function(err,res){
+		    res.status.should.equal(200);
+		    done();
+	    	});
+  	});
 
-	it('should return Hello Elia', function() {
-		request(url)
-			.post('/api/visitors')
-			.send(body)
-	    // end handles the response
-		.end(function(err, res) {
-	         if (err) {
-	         	throw err;
-	         }
-	         // this is should.js syntax, very clear
-	         res.text.should.equal("Hello Elia!");
-	    });
-	});
-});*/
+  	it("should return Hello Watson on def file",function(done){
+	    server
+	    .post("/api/transcript")
+	    .send(body)
+	    .expect(200)
+	    .end(function(err,res){
+		    res.text.should.equal("Hello Watson.");
+		    done();
+	    	});
+  	});
+}); 
